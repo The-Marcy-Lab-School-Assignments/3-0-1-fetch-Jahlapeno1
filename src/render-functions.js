@@ -30,14 +30,77 @@ export const setupPageBasics = (parentEl) => {
     return { statusDiv, usersUl, postsUl, newUserForm, newUserDiv };
 };
 
-export const renderStatus = () => {
+export const renderStatus = (statusDiv, statusInfoObj) => {
+  const h2 = document.createElement("h2")
+  // console.log(statusInfoObj)
+  
+  h2.setAttribute("id", "status-heading")
+  h2.textContent = `Info on - ${statusInfoObj.url}`
+  
+  const ptag = document.createElement("p")
+  ptag.setAttribute("id", "status-code")
+  
+  const status = statusInfoObj.ok ? "OK!" : "FAIL!";
+  
+  ptag.textContent = `Status code: ${statusInfoObj.status}, ${status}`
+  statusDiv.append(h2, ptag)
 }
 
-export const renderUsers = () => {
+export const renderUsers = (userUI, users) => {
+  // const li = document.createElement("li")
+  // li.classList.add("user-card")
+  // const button = document.createElement("button")
+  // li.appendChild(button)
+  userUI.innerHTML = ""
+  users.forEach(userObj => {
+    const li = document.createElement("li")
+    li.classList.add("user-card")
+    const button = document.createElement("button")
+    li.appendChild(button)
+    button.textContent = `Load ${userObj.username}'s posts`
+    button.setAttribute("data-user-id", `${userObj.id}`)
+    userUI.appendChild(li)
+  })
 };
 
-export const renderPosts = () => {
+export const renderPosts = (postsUl, posts) => {
+  postsUl.innerHTML = ""
+  // posts.forEach(post => {
+    for (let i = 0; i < 3; i++) {
+      const li = document.createElement("li")
+    
+      const h2 = document.createElement("h2")
+      
+      h2.textContent = posts[i].title
+      
+      const p = document.createElement("p")
+      
+      p.textContent = posts[i].body
+      
+      li.append(h2, p)
+  
+      postsUl.append(li)
+    }
+    // const li = document.createElement("li")
+    
+    // const h2 = document.createElement("h2")
+    
+    // h2.textContent = post.title
+    
+    // const p = document.createElement("p")
+    
+    // p.textContent = post.body
+    
+    // li.append(h2, p)
+
+    // postsUl.append(li)
 }
 
-export const renderNewUser = () => {
+export const renderNewUser = (newUserDiv, newUserInfo) => {
+  newUserDiv.innerHTML = ""
+  const h2 = document.createElement("h2")
+  h2.textContent = newUserInfo.name
+  const p = document.createElement("p")
+  p.textContent = newUserInfo.email
+  newUserDiv.append(h2, p)
 }
