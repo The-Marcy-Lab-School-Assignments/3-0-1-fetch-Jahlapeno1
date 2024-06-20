@@ -13,6 +13,7 @@ import {
 } from './fetch-functions.js';
 
 export default function app(appDiv) {
+  /** FEEDBACK: Because you did not destructure your object, every time you need an element from the object you will need to do website.element. */
   const website = setupPageBasics(appDiv)
   checkResponseStatus()
   .then((data) => {
@@ -24,12 +25,14 @@ export default function app(appDiv) {
     // console.log(data)
     renderUsers(website.usersUl, data)
   })
-  
+  /** FEEDBACK: Here is an example of where this occurs, here instead of getting the element by its id, you should be targeting the element through your website object. */
   const user = document.getElementById("users-list")
   // console.log(user)
+  /** FEEDBACK: Instead of user.addEventListener... etc, you should write website.usersUl! */
   user.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
       // console.log(event.target.getAttribute("data-user-id"))
+      /** FEEDBACK: Same here, use the elements that were given and are currently stored in your website variable. */
       const userId = event.target.getAttribute("data-user-id")
       getUserPosts(userId)
       .then((data) => {

@@ -99,6 +99,7 @@ export const renderPosts = (postsUl, posts) => {
 export const renderNewUser = (newUserDiv, newUserInfo) => {
   newUserDiv.innerHTML = ""
   const h2 = document.createElement("h2")
+  /** FEEDBACK: Look at the tests! This should be .username rather than .name! */
   h2.textContent = newUserInfo.name
   const p = document.createElement("p")
   p.textContent = newUserInfo.email
